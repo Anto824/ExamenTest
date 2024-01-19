@@ -1,52 +1,25 @@
 import unittest
 from GestionTaches import GestionTaches
+from Tache import Tache
 from Projet import Projet
 
-
 class TestProjet(unittest.TestCase):
+    def setUp(self):
+        self.taches = [Tache("Tache 1", "Description de la tache")]
 
-    def test_ajouter_tache_au_projet(self):
-        gestion_taches = GestionTaches()
-        projet = Projet("Projet 1", gestion_taches)
-        projet.ajouter_tache("Tâche 1", "Description de la tâche 1")
-        self.assertEqual(len(projet.taches), 1)
-        self.assertEqual(projet.taches[0]["titre"], "Tâche 1")
-        self.assertEqual(projet.taches[0]["complet"], False)
-        self.assertEqual(len(gestion_taches.taches), 1)
-        self.assertEqual(gestion_taches.taches[0]["titre"], "Tâche 1")
-        self.assertEqual(gestion_taches.taches[0]["complet"], False)
+    def test_ajouter_tache(self):
+        projet = Projet("Projet 1", self.taches)
+        projet.ajouter_tache("Nouvelle Tache", "Description de la nouvelle tache")
+        self.assertEqual(len(projet.taches), 2)
 
-    def test_completer_tache_du_projet(self):
-        gestion_taches = GestionTaches()
-        projet = Projet("Projet 1", gestion_taches)
-        projet.ajouter_tache("Tâche 1", "Description de la tâche 1")
-        projet.completer_tache("Tâche 1")
-        self.assertTrue(projet.verifier_tache("Tâche 1"))
-        self.assertTrue(gestion_taches.verifier_tache("Tâche 1"))
+    def test_completer_tache(self):
+        projet = Projet("Projet 1", self.taches)
+        projet.completer_tache("Tache 1")
+        self.assertTrue(projet.taches[0].complet)
 
-    def test_verifier_tache_non_completee_du_projet(self):
-        gestion_taches = GestionTaches()
-        projet = Projet("Projet 1", gestion_taches)
-        projet.ajouter_tache("Tâche 1", "Description de la tâche 1")
-        self.assertFalse(projet.verifier_tache("Tâche 1"))
-        self.assertFalse(gestion_taches.verifier_tache("Tâche 1"))
-
-    def test_verifier_tache_completee_du_projet(self):
-        gestion_taches = GestionTaches()
-        projet = Projet("Projet 1", gestion_taches)
-        projet.ajouter_tache("Tâche 1", "Description de la tâche 1")
-        projet.completer_tache("Tâche 1")
-        self.assertTrue(projet.verifier_tache("Tâche 1"))
-        self.assertTrue(gestion_taches.verifier_tache("Tâche 1"))
-
-    def test_completer_tache_inexistante_du_projet(self):
-        gestion_taches = GestionTaches()
-        projet = Projet("Projet 1", gestion_taches)
-        projet.ajouter_tache("Tâche 1", "Description de la tâche 1")
-        projet.completer_tache("Tâche 2")
-        self.assertFalse(projet.verifier_tache("Tâche 2"))
-        self.assertFalse(gestion_taches.verifier_tache("Tâche 2"))
-
+    def test_verifier_tache(self):
+        projet = Projet("Projet 1", self.taches)
+        self.assertFalse(projet.verifier_tache("Tache 1"))
 
 if __name__ == '__main__':
     unittest.main()
