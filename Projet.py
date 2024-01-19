@@ -1,7 +1,8 @@
+# Importing necessary modules
 from GestionTaches import GestionTaches
 from Tache import Tache
 
-
+# Class representing a project
 class Projet:
     def __init__(self, nom, taches):
         self.nom = nom
@@ -17,9 +18,11 @@ class Projet:
         self.taches.append(nouvelle_tache)
 
     def completer_tache(self, titre):
+        """Marque une tâche comme complétée."""
         return GestionTaches.completer_tache(titre, self.taches)
 
     def verifier_tache(self, titre):
+        """Vérifie si une tâche est complétée ou non."""
         return GestionTaches.verifier_tache(titre, self.taches)
     
     def calculer_duree_totale(self):
