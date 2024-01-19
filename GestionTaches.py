@@ -1,6 +1,7 @@
 class GestionTaches:
     def __init__(self):
         self.taches = []
+        a
 
     def ajouter_tache(self, titre, description):
         """Ajoute une nouvelle tâche au projet."""
