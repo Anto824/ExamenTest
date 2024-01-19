@@ -1,3 +1,5 @@
+import GestionTaches
+
 class Projet:
     def __init__(self, nom, taches):
         self.nom = nom
@@ -6,12 +8,14 @@ class Projet:
     def ajouter_tache(self, titre, description):
         """Ajoute une nouvelle tâche au projet."""
         for tache in self.taches:
-            if tache["titre"] == titre:
+            if tache.titre == titre:
                 print(f"Tâche avec le titre '{titre}' déjà existante.")
                 return
-        nouvelle_tache = {"titre": titre, "description": description, "complet": False}
+        nouvelle_tache = GestionTaches.Tache(titre, description, complet=False)
         self.taches.append(nouvelle_tache)
-        
-        
 
+    def completer_tache(self, titre):
+        return GestionTaches.GestionTaches.completer_tache(titre, self.taches)
 
+    def verifier_tache(self, titre):
+        return GestionTaches.GestionTaches.verifier_tache(titre, self.taches)

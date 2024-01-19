@@ -1,23 +1,25 @@
-import Projet
-
+class Tache:
+    def __init__(self, titre, description, complet=False):
+        self.titre = titre
+        self.description = description
+        self.complet = complet
 
 class GestionTaches:
-    def __init__(self, Projet):
-        self.taches = []
-        self.Projet = Projet()
+    taches = []
 
-    def completer_tache(self, titre):
+    @classmethod
+    def completer_tache(cls, titre):
         """Marque une tâche comme complétée."""
-        for tache in self.Projet.taches:
-            if tache["titre"] == titre:
-                tache["complet"] = True
+        for tache in cls.taches:
+            if tache.titre == titre:
+                tache.complet = True
                 return
-        print(f"Tâche avec le titre '{titre}' non trouvée.")
+        raise Exception(f"Tâche avec le titre '{titre}' non trouvée.")
 
-    def verifier_tache(self, titre):
+    @classmethod
+    def verifier_tache(cls, titre):
         """Vérifie si une tâche est complétée."""
-        for tache in self.Projet.taches:
-            if tache["titre"] == titre:
-                return tache["complet"]
-        print(f"Tâche avec le titre '{titre}' non trouvée.")
-        return False
+        for tache in cls.taches:
+            if tache.titre == titre:
+                return tache.complet
+        raise Exception(f"Tâche avec le titre '{titre}' non trouvée.")
