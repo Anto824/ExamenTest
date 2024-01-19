@@ -39,12 +39,6 @@ class TestProjet(unittest.TestCase):
         taches = []
         projet = Projet("Projet 1", taches)
         self.assertFalse(projet.calculer_duree_totale())
-            
-            
-
-            
-        
-
 
 if __name__ == '__main__':
     unittest.main()
