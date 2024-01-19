@@ -21,3 +21,12 @@ class Projet:
 
     def verifier_tache(self, titre):
         return GestionTaches.verifier_tache(titre, self.taches)
+    
+    def calculer_duree_totale(self):
+        """Calcule la durée totale nécessaire pour toutes les tâches d'un projet."""
+        if len(self.taches) == 0:
+            return False
+        duree_totale = 0
+        for tache in self.taches:
+            duree_totale += tache.duree
+        return duree_totale
